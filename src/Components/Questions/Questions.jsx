@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Questions = () => {
     const [teamName, setTeamName] = useState();
@@ -59,6 +60,7 @@ const Questions = () => {
 
     return (
         <div className='min-h-screen pt-24 mb-20 pb-20 w-1/4'>
+            <Link to='/chart' className='font-semibold'>--Go to Chart</Link>
             <h2 className='text-6xl font-bold'>Tell Us About Your Team</h2>
             <form onSubmit={handleSubmit} className="form-control w-full flex flex-col gap-5">
                 <label className="label">
@@ -223,7 +225,9 @@ const Questions = () => {
                     </div>
                 }
 
-                <button type="submit" className={teamName && work && confirm && profession && role && size && medium ? 'w-full bg-primary text-3xl font-semibold px-6 py-4 my-5 text-white rounded-md' : 'w-full bg-red-100 text-3xl font-semibold px-6 py-4 my-5 text-gray-500 rounded-md'} disabled={!teamName && !work && !confirm && !profession && !role && !size && !medium}>Continue</button>
+                <button type="submit"
+                    className={teamName && work && confirm && profession && role && size && medium ? 'w-full bg-primary text-3xl font-semibold px-6 py-4 my-5 text-white rounded-md' : 'w-full bg-red-100 text-3xl font-semibold px-6 py-4 my-5 text-gray-500 rounded-md disabled'}
+                    disabled={!teamName && !work && !confirm && !profession && !role && !size && !medium}>Continue</button>
             </form>
         </div>
     );

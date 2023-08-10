@@ -1,12 +1,15 @@
 
+import { RouterProvider } from 'react-router-dom'
 import './App.css'
-import Questions from './Components/Questions/Questions'
+import { router } from './Routes/Routes/Routes'
 
 function App() {
 
   return (
     <div data-theme='light' className='flex justify-center items-center'>
-      <Questions />
+      <RouterProvider router={router}>
+
+      </RouterProvider>
     </div>
   )
 }
