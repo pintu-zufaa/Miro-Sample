@@ -27,6 +27,9 @@ const Charts = () => {
     const goToNextMonth = () => {
         setCurrentMonth(currentMonth.clone().add(1, 'month'));
     };
+    const goToToday = () => {
+        setCurrentMonth(moment()); // Set current month to the current date
+    };
 
     // const today = moment();
 
@@ -84,51 +87,21 @@ const Charts = () => {
             <Link to='/' className='font-semibold'>--Go to Home</Link>
             <div>
                 <div className="custom-calendar">
-                    <button onClick={goToPreviousMonth}>{'<'}Previous</button> {/* Button to go to previous month */}
-                    <button onClick={goToNextMonth}>Next{'>'}</button> {/* Button to go to next month */}
+                    <div className='flex gap-5'>
+                        <button onClick={goToPreviousMonth}>{'<'}Previous</button>
+                        <button onClick={goToToday}>{'<<'}Today {'>>'}</button>
+                        <button onClick={goToNextMonth}>Next{'>'}</button>
+                    </div>
                     <div className="calendar-header">
                         {currentMonth.format('MMMM YYYY')}
                     </div>
-                    {/* <div className="grid grid-cols-7 gap-5 w-full mb-5 rounded-sm">
-                        {
-                            weeks?.map((day, i) =>
-                                <h2 key={i} className='text-lg font-semibold text-center border'>{day}</h2>
-                            )
-                        }
-                    </div> */}
-                    {/* <div className="grid grid-cols-7 gap-5 w-full">
-                        {
-                            weeks?.map((dayName, i) =>
-                               
-                                <h2
-                                    key={i}
-                                    className={`text-lg font-semibold text-center border ${i === moment().day() ? 'bg-slate-300' : '' 
-                                        }`}
-                                >
-                                    {dayName}
-                                </h2>
-                            )
-                        }
-                        {calendarRows}
-                        {calendarRows.map((calendarRow, i) => (
-                            <div
-                                key={i}
-                                className={`border p-3 h-40 ${moment(startDate).add(i, 'days').isSame(moment(), 'day')
-                                    ? 'bg-slate-300' 
-                                    : 'bg-gray-100'
-                                    } rounded-sm`}
-                            >
-                                {calendarRow} 
-                            </div>
-                        ))}
-                    </div> */}
+
 
                     <div className="grid grid-cols-7 gap-5 w-full">
                         {weeks.map((dayName, i) => (
                             <h2
                                 key={i}
-                                className={`text-lg font-semibold text-center border ${i === firstDayOfMonthIndex ? 'bg-slate-300' : ''
-                                    }`}
+                                className={`text-lg font-semibold text-center border `}
                             >
                                 {dayName}
                             </h2>
