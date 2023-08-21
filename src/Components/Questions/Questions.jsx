@@ -63,10 +63,13 @@ const Questions = () => {
             <Link to='/chart' className='font-semibold'>--Go to Chart</Link>
             <h2 className='text-6xl font-bold'>Tell Us About Your Team</h2>
             <form onSubmit={handleSubmit} className="form-control w-full flex flex-col gap-5">
-                <label className="label">
-                    <span className="label-text text-xl font-semibold">What is your team name?</span>
-                </label>
-                <input onChange={handleTeamName} type="text" placeholder="e.g Product Marketing" name='team_name' className="px-6 text-2xl py-4 border border-black rounded-md w-full" />
+                <div>
+                    <label className="label mt-5">
+                        <span className="label-text text-xl font-semibold">What is your team name?</span>
+                    </label>
+                    <input onChange={handleTeamName} type="text" maxLength={30} placeholder="e.g Product Marketing" name='team_name' className="px-6 text-2xl py-4 border border-black rounded-md w-full" />
+                    {/* <input type="file" name="" id="" accept='video/*,.png,.jpg' /> */}
+                </div>
                 {
                     teamName &&
                     <div>
@@ -227,7 +230,7 @@ const Questions = () => {
 
                 <button type="submit"
                     className={teamName && work && confirm && profession && role && size && medium ? 'w-full bg-primary text-3xl font-semibold px-6 py-4 my-5 text-white rounded-md' : 'w-full bg-red-100 text-3xl font-semibold px-6 py-4 my-5 text-gray-500 rounded-md disabled'}
-                    disabled={!teamName && !work && !confirm && !profession && !role && !size && !medium}>Continue</button>
+                    disabled={!teamName || !work || !confirm || !profession || !role || !size || !medium}>Continue</button>
             </form>
         </div>
     );
