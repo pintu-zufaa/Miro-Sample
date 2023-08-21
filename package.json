@@ -13,6 +13,7 @@
     "@szhsin/react-menu": "^4.0.3",
     "@types/react-chartjs-2": "^2.5.7",
     "chart.js": "^4.3.3",
+    "date-fns": "^2.30.0",
     "faker": "^6.6.6",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.2",
