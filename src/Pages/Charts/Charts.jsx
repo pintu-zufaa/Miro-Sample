@@ -57,6 +57,7 @@ const Charts = () => {
             <div key={i}>
                 <div className='flex justify-between '>
                     <span className='text-lg font-semibold'>{date.date()}</span>
+                    {/* <button onClick={() => handleAddClick(date)}>click me</button> */}
 
                     <Menu align='end' arrow={true} menuButton={<MenuButton>
                         <div>
@@ -87,10 +88,10 @@ const Charts = () => {
             <Link to='/' className='font-semibold'>--Go to Home</Link>
             <div>
                 <div className="custom-calendar">
-                    <div className='flex gap-5'>
-                        <button onClick={goToPreviousMonth}>{'<'}Previous</button>
-                        <button onClick={goToToday}>{'<<'}Today {'>>'}</button>
-                        <button onClick={goToNextMonth}>Next{'>'}</button>
+                    <div>
+                        <button onClick={goToPreviousMonth} className='border px-5 py-1 rounded-l-sm'>{'<'}Previous</button>
+                        <button onClick={goToToday} className='border px-5 py-1 border-x-0'>{'<<'}Today {'>>'}</button>
+                        <button onClick={goToNextMonth} className='border px-5 py-1 rounded-r-sm'>Next{'>'}</button>
                     </div>
                     <div className="calendar-header">
                         {currentMonth.format('MMMM YYYY')}
