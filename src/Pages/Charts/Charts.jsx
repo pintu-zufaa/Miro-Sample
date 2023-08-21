@@ -37,6 +37,7 @@ const Charts = () => {
 
     const day = format(new Date(currentMonth?._d), 'eee')
     const weeks = currentMonth?._locale?._weekdaysShort
+    const firstDayOfMonthIndex = currentMonth.startOf('month').day();
 
     for (let i = 0; i < daysInMonth; i++) {
         const date = moment(startDate).add(i, 'days');
@@ -50,7 +51,7 @@ const Charts = () => {
         }
 
         calendarRows.push(
-            <div key={i} className={`border p-3 h-40 ${today === thisDay ? ' bg-slate-300' : 'bg-gray-100'} rounded-sm`}>
+            <div key={i}>
                 <div className='flex justify-between '>
                     <span className='text-lg font-semibold'>{date.date()}</span>
 
@@ -83,8 +84,8 @@ const Charts = () => {
             <Link to='/' className='font-semibold'>--Go to Home</Link>
             <div>
                 <div className="custom-calendar">
-                    <button onClick={goToPreviousMonth}>&lt;</button> {/* Button to go to previous month */}
-                    <button onClick={goToNextMonth}>&gt;</button> {/* Button to go to next month */}
+                    <button onClick={goToPreviousMonth}>{'<'}Previous</button> {/* Button to go to previous month */}
+                    <button onClick={goToNextMonth}>Next{'>'}</button> {/* Button to go to next month */}
                     <div className="calendar-header">
                         {currentMonth.format('MMMM YYYY')}
                     </div>
@@ -95,13 +96,56 @@ const Charts = () => {
                             )
                         }
                     </div> */}
-                    <div className="grid grid-cols-7 gap-5 w-full">
+                    {/* <div className="grid grid-cols-7 gap-5 w-full">
                         {
-                            weeks?.map((day, i) =>
-                                <h2 key={i} className='text-lg font-semibold text-center border'>{day}</h2>
+                            weeks?.map((dayName, i) =>
+                               
+                                <h2
+                                    key={i}
+                                    className={`text-lg font-semibold text-center border ${i === moment().day() ? 'bg-slate-300' : '' 
+                                        }`}
+                                >
+                                    {dayName}
+                                </h2>
                             )
                         }
                         {calendarRows}
+                        {calendarRows.map((calendarRow, i) => (
+                            <div
+                                key={i}
+                                className={`border p-3 h-40 ${moment(startDate).add(i, 'days').isSame(moment(), 'day')
+                                    ? 'bg-slate-300' 
+                                    : 'bg-gray-100'
+                                    } rounded-sm`}
+                            >
+                                {calendarRow} 
+                            </div>
+                        ))}
+                    </div> */}
+
+                    <div className="grid grid-cols-7 gap-5 w-full">
+                        {weeks.map((dayName, i) => (
+                            <h2
+                                key={i}
+                                className={`text-lg font-semibold text-center border ${i === firstDayOfMonthIndex ? 'bg-slate-300' : ''
+                                    }`}
+                            >
+                                {dayName}
+                            </h2>
+                        ))}
+                        {/* Fill empty columns for days before the first day of the month */}
+                        {Array.from({ length: firstDayOfMonthIndex }, (_, i) => (
+                            <div key={i} className="border p-3 h-40 bg-gray-100 rounded-sm"></div>
+                        ))}
+                        {calendarRows.map((calendarRow, i) => (
+                            <div
+                                key={i}
+                                className={`border p-3 h-40 ${moment(startDate).add(i, 'days').isSame(moment(), 'day') ? 'bg-slate-300' : 'bg-gray-100'} rounded-sm`}
+                            >
+                                {calendarRow}
+                                {/* ... (rest of your calendar row JSX) */}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
