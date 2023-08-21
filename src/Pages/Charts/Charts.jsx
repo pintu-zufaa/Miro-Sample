@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import CustomEvent from '../../Components/CustomEvent/CustomEvent';
 import '../Charts/Chart.css'
 import { Menu, MenuButton, MenuItem } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -14,6 +12,7 @@ import { format } from 'date-fns';
 
 const Charts = () => {
     const [selectedDate, setSelectedDate] = useState(null);
+    const [currentMonth, setCurrentMonth] = useState(moment());
 
     const handleAddClick = (date) => {
         setSelectedDate(date);
@@ -21,15 +20,23 @@ const Charts = () => {
         console.log(`Add button clicked for ${date}`);
     };
 
-    const today = moment();
+    const goToPreviousMonth = () => {
+        setCurrentMonth(currentMonth.clone().subtract(1, 'month'));
+    };
 
-    const daysInMonth = today.daysInMonth();
-    const startDate = moment(today).startOf('month');
+    const goToNextMonth = () => {
+        setCurrentMonth(currentMonth.clone().add(1, 'month'));
+    };
+
+    // const today = moment();
+
+    const daysInMonth = currentMonth.daysInMonth();
+    const startDate = moment(currentMonth).startOf('month');
 
     const calendarRows = [];
 
-    const day = format(new Date(today?._d), 'eee')
-    const weeks = today?._locale?._weekdaysShort
+    const day = format(new Date(currentMonth?._d), 'eee')
+    const weeks = currentMonth?._locale?._weekdaysShort
 
     for (let i = 0; i < daysInMonth; i++) {
         const date = moment(startDate).add(i, 'days');
@@ -37,7 +44,7 @@ const Charts = () => {
 
         const today = format(new Date(newDate), 'PP')
         const thisDay = format(new Date(date?._d), 'PP')
-        // console.log(thisDay);
+
         if (today === thisDay) {
             console.log(today);
         }
@@ -76,8 +83,10 @@ const Charts = () => {
             <Link to='/' className='font-semibold'>--Go to Home</Link>
             <div>
                 <div className="custom-calendar">
+                    <button onClick={goToPreviousMonth}>&lt;</button> {/* Button to go to previous month */}
+                    <button onClick={goToNextMonth}>&gt;</button> {/* Button to go to next month */}
                     <div className="calendar-header">
-                        {today.format('MMMM YYYY')}
+                        {currentMonth.format('MMMM YYYY')}
                     </div>
                     {/* <div className="grid grid-cols-7 gap-5 w-full mb-5 rounded-sm">
                         {
