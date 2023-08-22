@@ -112,7 +112,7 @@ const Charts = () => {
                                 {
                                     parseInt(format(new Date(item?.date), 'd')) === parseInt(date.date()) &&
 
-                                    <p className='px-3 py-1 border rounded-md w-full bg-white mb-1'>{item?.title?.length > 15 ? item?.title.slice(0, 15) + '...' : item?.title}</p>
+                                    <button className='px-3 py-1 border rounded-md w-full bg-white mb-1'>{item?.title?.length > 15 ? item?.title.slice(0, 15) + '...' : item?.title}</button>
 
                                 }
                             </div>
@@ -126,7 +126,7 @@ const Charts = () => {
         <div className='min-h-screen flex flex-col gap-5 py-20 w-3/4 mx-auto'>
             <Link to='/' className='font-semibold'>--Go to Home</Link>
             <div>
-                <div className="custom-calendar">
+                <div className="custom-calendar rounded-md p-5">
                     <div>
                         <button onClick={goToPreviousMonth} className='border px-5 py-1 rounded-l-sm'>{'<'}Previous</button>
                         <button onClick={goToToday} className='border px-5 py-1 border-x-0'>{'<<'}Today {'>>'}</button>
