@@ -31,6 +31,28 @@ const Charts = () => {
         setCurrentMonth(moment()); // Set current month to the current date
     };
 
+    const data = [
+        {
+            title: 'New data1',
+            date: 'Aug 22, 2023'
+        },
+        {
+            title: 'New data2',
+            date: 'Aug 25, 2023'
+        },
+        {
+            title: 'New data3',
+            date: 'Aug 28, 2023'
+        },
+        {
+            title: 'New data4',
+            date: 'Aug 20, 2023'
+        },
+        {
+            title: 'New data5',
+            date: 'Aug 20, 2023'
+        },
+    ]
     // const today = moment();
 
     const daysInMonth = currentMonth.daysInMonth();
@@ -49,15 +71,13 @@ const Charts = () => {
         const today = format(new Date(newDate), 'PP')
         const thisDay = format(new Date(date?._d), 'PP')
 
-        if (today === thisDay) {
-            console.log(today);
-        }
 
         calendarRows.push(
             <div key={i}>
                 <div className='flex justify-between '>
                     <span className='text-lg font-semibold'>{date.date()}</span>
                     {/* <button onClick={() => handleAddClick(date)}>click me</button> */}
+
 
                     <Menu align='end' arrow={true} menuButton={<MenuButton>
                         <div>
@@ -79,6 +99,18 @@ const Charts = () => {
                             </div>
                         </MenuItem>
                     </Menu>
+                </div>
+                <div>
+                    {
+                        data?.map((item, i) =>
+                            <div key={i}>
+                                {
+                                    parseInt(format(new Date(item?.date), 'd')) === parseInt(date.date()) &&
+                                    <span>{item?.title}</span>
+                                }
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         );
