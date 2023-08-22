@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+// import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import '../Charts/Chart.css'
@@ -56,6 +56,10 @@ const Charts = () => {
             title: 'New data5',
             date: 'Aug 20, 2023'
         },
+        {
+            title: 'New data5',
+            date: 'Sep 20, 2023'
+        },
 
     ]
     // const today = moment();
@@ -110,10 +114,8 @@ const Charts = () => {
                         data?.map((item, i) =>
                             <div key={i}>
                                 {
-                                    parseInt(format(new Date(item?.date), 'd')) === parseInt(date.date()) &&
-
-                                    <button className='px-3 py-1 border rounded-md w-full bg-white mb-1'>{item?.title?.length > 15 ? item?.title.slice(0, 15) + '...' : item?.title}</button>
-
+                                    format(new Date(item?.date), 'PP') === format(new Date(date?._d), 'PP') &&
+                                    <button className='px-2 py-1 border rounded-md w-full bg-white mb-1'>{item?.title?.length > 15 ? item?.title.slice(0, 15) + '...' : item?.title}</button>
                                 }
                             </div>
                         )
@@ -136,7 +138,6 @@ const Charts = () => {
                         {currentMonth.format('MMMM YYYY')}
                     </div>
 
-
                     <div className="grid grid-cols-7 gap-5 w-full">
                         {weeks.map((dayName, i) => (
                             <h2
@@ -146,7 +147,7 @@ const Charts = () => {
                                 {dayName}
                             </h2>
                         ))}
-                        {/* Fill empty columns for days before the first day of the month */}
+
                         {Array.from({ length: firstDayOfMonthIndex }, (_, i) => (
                             <div key={i} className="border p-3 h-40 bg-gray-100 rounded-sm"></div>
                         ))}
@@ -156,7 +157,7 @@ const Charts = () => {
                                 className={`border p-3 h-40 ${moment(startDate).add(i, 'days').isSame(moment(), 'day') ? 'bg-slate-300' : 'bg-gray-100'} rounded-sm`}
                             >
                                 {calendarRow}
-                                {/* ... (rest of your calendar row JSX) */}
+
                             </div>
                         ))}
                     </div>
