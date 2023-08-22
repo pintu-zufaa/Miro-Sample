@@ -37,6 +37,10 @@ const Charts = () => {
             date: 'Aug 22, 2023'
         },
         {
+            title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quisquam eos placeat',
+            date: 'Aug 25, 2023'
+        },
+        {
             title: 'New data2',
             date: 'Aug 25, 2023'
         },
@@ -52,6 +56,7 @@ const Charts = () => {
             title: 'New data5',
             date: 'Aug 20, 2023'
         },
+
     ]
     // const today = moment();
 
@@ -100,13 +105,15 @@ const Charts = () => {
                         </MenuItem>
                     </Menu>
                 </div>
-                <div>
+                <div className=''>
                     {
                         data?.map((item, i) =>
                             <div key={i}>
                                 {
                                     parseInt(format(new Date(item?.date), 'd')) === parseInt(date.date()) &&
-                                    <span>{item?.title}</span>
+
+                                    <p className='px-3 py-1 border rounded-md w-full bg-white mb-1'>{item?.title?.length > 15 ? item?.title.slice(0, 15) + '...' : item?.title}</p>
+
                                 }
                             </div>
                         )
